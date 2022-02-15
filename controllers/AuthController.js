@@ -16,9 +16,9 @@ exports.isAuth = (req,res,next) => {
 };
 
 exports.registerUser = (req, res) => {
-  const { name, email, password } = req.body;
+  const { firstname,lastname,phone,address, email, password } = req.body;
 
-  const result = registerSchema.validate({ name, email, password});
+  const result = registerSchema.validate({ firstname, email, password});
   if(!result.error) {
 
       // Check for existing user
@@ -27,7 +27,10 @@ exports.registerUser = (req, res) => {
 
         //New User created
         const newUser = new User({
-          name,
+          firstname,
+          lastname,
+          phone,
+          address,
           email,
           password
         });
@@ -68,7 +71,7 @@ exports.loginUser = (req, res) => {
       bcrypt.compare(password, user.password).then((isMatch) => {
         if (!isMatch) return res.status(400).json("Incorrect Email or Password");
 
-        const sessUser = { id: user.id, name: user.name, email: user.email };
+        const sessUser = { id: user.id, name: user.firstname, email: user.email };
         req.session.user = sessUser; // Auto saves session data in mongo store
 
         res.json(sessUser); // sends cookie with sessionID automatically in response

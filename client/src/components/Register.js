@@ -21,7 +21,10 @@ import "./style.css";
 
 class Register extends Component {
   state = {
-    name: "",
+    firstname: "",
+    lastname:"",
+    phone:"",
+    address:"",
     email: "",
     password: "",
     msg: ""
@@ -70,9 +73,9 @@ class Register extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { name, email, password } = this.state;
+    const { firstname,lastname,phone,address, email, password } = this.state;
 
-    const user = { name, email, password };
+    const user = { firstname,lastname,phone,address, email, password };
     this.props.isLoading();
     this.props.register(user);
   };
@@ -113,11 +116,47 @@ class Register extends Component {
             {alert}
             <Form onSubmit={this.onSubmit}>
               <FormGroup className="text-center">
-                <Label for="name">Name</Label>
+                <Label for="firstname">Firstname</Label>
                 <Input
                   type="text"
-                  name="name"
-                  id="name"
+                  name="firstname"
+                  id="firstname"
+                  placeholder="Enter your name"
+                  className="mb-3"
+                  size="lg"
+                  onChange={this.onChange}
+                />
+
+            
+                <Label for="lastname">Lastname</Label>
+                <Input
+                  type="text"
+                  name="lastname"
+                  id="lastname"
+                  placeholder="Enter your name"
+                  className="mb-3"
+                  size="lg"
+                  onChange={this.onChange}
+                />
+                
+          
+                <Label for="phone">Phone</Label>
+                <Input
+                  type="text"
+                  name="phone"
+                  id="phone"
+                  placeholder="Enter your name"
+                  className="mb-3"
+                  size="lg"
+                  onChange={this.onChange}
+                />
+
+              
+                <Label for="address">Address</Label>
+                <Input
+                  type="text"
+                  name="address"
+                  id="address"
                   placeholder="Enter your name"
                   className="mb-3"
                   size="lg"
@@ -145,6 +184,7 @@ class Register extends Component {
                   size="lg"
                   onChange={this.onChange}
                 />
+
                 <Button color="dark" className="mt-5" size="lg" block>
                 { this.props.loading ?
                        <span >Registering.. <Spinner size="sm" color="light" /></span> : <span>Register</span>}

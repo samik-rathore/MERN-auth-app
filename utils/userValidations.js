@@ -20,7 +20,7 @@ const password = Joi.string().min(6).max(16).pattern(/^[a-zA-Z0-9]/).required().
 // .required().error(new Error('Password cannot be empty'));
 
 
-const name = Joi.string().min(8).max(30).pattern(/^[a-zA-Z' ]{3,20}$/).required().messages({
+const firstname = Joi.string().min(8).max(30).pattern(/^[a-zA-Z' ]{3,20}$/).required().messages({
   'string.pattern.base': `Your name can only contain lower and uppercase letters and apostrophes`,
   'string.empty': `Name cannot be an empty field`,
   'string.min': `Name should have a minimum length of {#limit}`,
@@ -30,4 +30,4 @@ const name = Joi.string().min(8).max(30).pattern(/^[a-zA-Z' ]{3,20}$/).required(
 
 exports.loginSchema = Joi.object({ email, password});
 
-exports.registerSchema = Joi.object({ name, email, password});
+exports.registerSchema = Joi.object({ firstname, email, password});
